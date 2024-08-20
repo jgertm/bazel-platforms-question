@@ -1,5 +1,17 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
+http_archive(
+    name = "platforms",
+    urls = [
+        "https://mirror.bazel.build/github.com/bazelbuild/platforms/releases/download/0.0.10/platforms-0.0.10.tar.gz",
+        "https://github.com/bazelbuild/platforms/releases/download/0.0.10/platforms-0.0.10.tar.gz",
+    ],
+    sha256 = "218efe8ee736d26a3572663b374a253c012b716d8af0c07e842e82f238a0a7ee",
+)
+
+load("@platforms//host:extension.bzl", "host_platform_repo")
+host_platform_repo(name = "host_platform")
+
 HERMETIC_CC_TOOLCHAIN_VERSION = "v3.1.0"
 
 http_archive(
@@ -19,3 +31,8 @@ load("@hermetic_cc_toolchain//toolchain:defs.bzl", zig_toolchains = "toolchains"
 zig_toolchains()
 
 register_toolchains("//:toolchain-darwin_arm64")
+
+register_execution_platforms(
+    "//:darwin_arm64",
+    "//:darwin_arm64-zig",
+)
