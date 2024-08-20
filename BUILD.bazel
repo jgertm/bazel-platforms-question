@@ -10,4 +10,20 @@ cc_binary(
     name = "main2",
     srcs = ["main.c"],
     tags = ["no-cache"],
+    exec_compatible_with = [":zig"],
+)
+
+toolchain(
+    name = "toolchain-darwin_arm64",
+    toolchain_type = "@bazel_tools//tools/cpp:toolchain_type",
+    exec_compatible_with = [":zig"],
+    target_compatible_with = ["@platforms//os:osx", "@platforms//cpu:aarch64"],
+    toolchain = "@zig_sdk//:aarch64-osx-none_cc",
+)
+
+constraint_setting(name = "cc")
+
+constraint_value(
+    name = "zig",
+    constraint_setting = ":cc",
 )

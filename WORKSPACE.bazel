@@ -17,3 +17,5 @@ load("@hermetic_cc_toolchain//toolchain:defs.bzl", zig_toolchains = "toolchains"
 # toolchain/defs.bzl:toolchains on how to change the Zig SDK version and
 # download URL.
 zig_toolchains()
+
+register_toolchains("//:toolchain-darwin_arm64")
