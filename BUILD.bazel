@@ -1,0 +1,13 @@
+# this should always be build using the default CC toolchain
+cc_binary(
+    name = "main",
+    srcs = ["main.c"],
+    tags = ["no-cache"],
+)
+
+# this should always be build using the zig toolchain
+cc_binary(
+    name = "main2",
+    srcs = ["main.c"],
+    tags = ["no-cache"],
+)
